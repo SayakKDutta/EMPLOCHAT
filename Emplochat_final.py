@@ -217,8 +217,8 @@ if prompt := st.chat_input("Enter your query here?"):
     # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(prompt)   
-
-with st.chat_message("assistant"):
+if len(message["content"])!=0:
+    with st.chat_message("assistant"):
         stream = client.chat.completions.create(
             model=st.session_state["openai_model"],
             messages=[{"role": "system", "content": "You are an expert in Capgemini policies.Generate response atleast 400 tokens"+m["content"]}
