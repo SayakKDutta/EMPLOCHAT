@@ -217,16 +217,16 @@ if prompt := st.chat_input("Enter your query here?"):
     with st.chat_message("user"):
         st.markdown(prompt)   
 
-with st.chat_message("assistant"):
-    stream = client.chat.completions.create(
-            model=st.session_state["openai_model"],
-            messages=[{"role": "system", "content": "You are an expert in Capgemini policies.Generate response atleast 400 tokens"+m["content"]}
-                for m in st.session_state.messages if len(m["content"])!=0
-            ],
-            stream=True,
-        )
+    with st.chat_message("assistant"):
+        stream = client.chat.completions.create(
+                model=st.session_state["openai_model"],
+                messages=[{"role": "system", "content": "You are an expert in Capgemini policies.Generate response atleast 400 tokens"+m["content"]}
+                    for m in st.session_state.messages if len(m["content"])!=0
+                ],
+                stream=True,
+            )
     response = st.write_stream(stream)
-st.session_state.messages.append({"role": "assistant", "content": response})
+    st.session_state.messages.append({"role": "assistant", "content": response})
 # # Display history
 # # for pair in st.session_state.history:
 # #     with st.container():
