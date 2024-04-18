@@ -206,9 +206,8 @@ if "messages" not in st.session_state:
 
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
-    if len(message["content"])!=0:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
 # Accept user input
 if prompt := st.chat_input("Enter your query here?"):
@@ -217,12 +216,12 @@ if prompt := st.chat_input("Enter your query here?"):
     # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(prompt)   
-if len(message["content"])!=0:
-    with st.chat_message("assistant"):
-        stream = client.chat.completions.create(
+
+with st.chat_message("assistant"):
+    stream = client.chat.completions.create(
             model=st.session_state["openai_model"],
             messages=[{"role": "system", "content": "You are an expert in Capgemini policies.Generate response atleast 400 tokens"+m["content"]}
-                for m in st.session_state.messages
+                for m in st.session_state.messages if len(m["content"])!=0
             ],
             stream=True,
         )
