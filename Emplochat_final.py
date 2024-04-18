@@ -212,7 +212,7 @@ for message in st.session_state.messages:
 # Accept user input
 if prompt := st.chat_input("Enter your query here?"):
     # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": prompt})
+    st.session_state.messages.append({"role": "user", "content": prompt, "context":"You are an expert in Capgemini policies.Generate response atleast 400 tokens"})
     # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(prompt)   
@@ -220,7 +220,7 @@ if prompt := st.chat_input("Enter your query here?"):
     with st.chat_message("assistant"):
         stream = client.chat.completions.create(
                 model=st.session_state["openai_model"],
-                messages=[{"role": "system", "content": m["content"]}
+                messages=[{"role": "system","context":m["conetxt"], "content": m["content"]}
                     for m in st.session_state.messages if len(m["content"])!=0
                 ],
                 stream=True,
