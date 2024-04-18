@@ -225,7 +225,7 @@ with st.chat_message("assistant"):
             ],
             stream=True,
         )
-        response = st.write_stream(stream)
+    response = st.write_stream(stream)
 st.session_state.messages.append({"role": "assistant", "content": response})
 # # Display history
 # # for pair in st.session_state.history:
