@@ -220,7 +220,7 @@ if prompt := st.chat_input("Enter your query here?"):
     with st.chat_message("assistant"):
         stream = client.chat.completions.create(
                 model=st.session_state["openai_model"],
-                messages=[{"role": "system","context":m["conetxt"], "content": m["content"]}
+                messages=[{"role": "system","context":m["context"], "content": m["content"]}
                     for m in st.session_state.messages if len(m["content"])!=0
                 ],
                 stream=True,
