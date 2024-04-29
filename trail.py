@@ -19,7 +19,7 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 url = 'https://github.com/naren579/EMPLOCHAT/raw/main/embeddings/db/chroma.sqlite3'
 
 # Path where the file will be saved locally
-local_path = 'app/'
+local_path = 'app/vector_embeddings'
 
 # Download the file if it doesn't already exist
 if not os.path.exists(local_path):
