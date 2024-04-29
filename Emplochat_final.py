@@ -113,7 +113,7 @@ if query := st.chat_input("Enter your query here?"):
     [/INST]
     '''
     # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": query})
+    st.session_state.messages.append({"role": "user", "content": prompt})
     # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(query)   
