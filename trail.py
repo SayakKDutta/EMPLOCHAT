@@ -3,7 +3,6 @@ import streamlit as st
 import os
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
-#import chromadb
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain.chat_models import ChatOpenAI
@@ -14,6 +13,7 @@ import streamlit as st
 __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+import chromadb
 
 # URL of the raw vector embeddings file on GitHub
 url = 'https://github.com/naren579/EMPLOCHAT/raw/main/embeddings/db/chroma.sqlite3'
