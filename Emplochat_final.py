@@ -221,7 +221,7 @@ if query := st.chat_input("Enter your query here?"):
   #print(context)
     prompt = f'''
     [INST]
-    You are an expert in Capgemini policies.Generate response atleast 400 tokens based on your training and by referring the context.
+    You are an expert in Capgemini policies.Generate response atleast 400 tokens by referring the context.
 
     Question: {query}
 
@@ -232,7 +232,7 @@ if query := st.chat_input("Enter your query here?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     # Display user message in chat message container
     with st.chat_message("user"):
-        st.markdown(prompt)   
+        st.markdown(query)   
 
     with st.chat_message("assistant"):
         stream = client.chat.completions.create(
