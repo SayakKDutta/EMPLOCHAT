@@ -21,6 +21,9 @@ url = 'https://github.com/naren579/EMPLOCHAT/raw/main/embeddings/db/chroma.sqlit
 # Path where the file will be saved locally
 local_path = 'app/vector_embeddings'
 
+# Create the directory if it doesn't exist
+os.makedirs(os.path.dirname(local_path), exist_ok=True)
+
 # Download the file if it doesn't already exist
 if not os.path.exists(local_path):
     with st.spinner('Downloading vector embeddings...'):
