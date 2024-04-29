@@ -38,6 +38,12 @@ store = Chroma(persist_directory='/mount/src/emplochat/embeddings/db',collection
 # Get all embeddings
 embeddings = store.get(include=['embeddings'])
 
+API_KEY = st.secrets["OPENAI_API_KEY"]
+from openai import OpenAI
+client = OpenAI(api_key=API_KEY)
+
+embed_prompt = OpenAIEmbeddings()
+
 ######################Getting Similar Vector Embeddings for a given prompt#####
 
 def retrieve_vector_db(query, n_results=3):
