@@ -113,7 +113,7 @@ if query := st.chat_input("Enter your query here?"):
     [/INST]
     '''
     # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": prompt})
+    st.session_state.messages.append({"role": "user", "content": query})
     # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(query)   
@@ -121,7 +121,7 @@ if query := st.chat_input("Enter your query here?"):
     with st.chat_message("assistant"):
         stream = client.chat.completions.create(max_tokens=1500,
                 model=st.session_state["openai_model"],
-                messages=[{"role": "system", "content":m['content']}
+                messages=[{"role": "system", "content":prompt}
                     for m in st.session_state.messages
                 ],
                 stream=True,
