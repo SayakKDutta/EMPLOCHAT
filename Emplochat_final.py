@@ -132,7 +132,7 @@ import chromadb
 API_KEY = st.secrets["OPENAI_API_KEY"]
 from openai import OpenAI
 client = OpenAI(api_key=API_KEY)
-persist_directory = 'mount/src/emplochat/embeddings/db'
+persist_directory = '/mount/src/emplochat/embeddings/db'
 #"https://github.com/naren579/CAPSTONE_EMPLOBOT/tree/main/embeddings/db"
 
 #Initialize the Chroma DB client
