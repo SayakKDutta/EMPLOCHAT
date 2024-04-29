@@ -15,25 +15,25 @@ import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import chromadb
 
-# URL of the raw vector embeddings file on GitHub
-url = 'https://github.com/naren579/EMPLOCHAT/raw/main/embeddings/db/chroma.sqlite3'
+# # URL of the raw vector embeddings file on GitHub
+# url = 'https://github.com/naren579/EMPLOCHAT/raw/main/embeddings/db/chroma.sqlite3'
 
-# Path where the file will be saved locally
-local_path = 'app/vector_embeddings'
+# # Path where the file will be saved locally
+# local_path = 'app/vector_embeddings'
 
-# Create the directory if it doesn't exist
-os.makedirs(os.path.dirname(local_path), exist_ok=True)
+# # Create the directory if it doesn't exist
+# os.makedirs(os.path.dirname(local_path), exist_ok=True)
 
-# Download the file if it doesn't already exist
-if not os.path.exists(local_path):
-    with st.spinner('Downloading vector embeddings...'):
-        response = requests.get(url)
-        with open(local_path, 'wb') as f:
-            f.write(response.content)
+# # Download the file if it doesn't already exist
+# if not os.path.exists(local_path):
+#     with st.spinner('Downloading vector embeddings...'):
+#         response = requests.get(url)
+#         with open(local_path, 'wb') as f:
+#             f.write(response.content)
 
 # Now you can load the vector embeddings file into your script
 #Initialize the Chroma DB client
-store = Chroma(persist_directory=local_path,collection_name="Capgemini_policy_embeddings")
+store = Chroma(persist_directory='/mount/src/emplochat/embeddings/db',collection_name="Capgemini_policy_embeddings")
 
 # Get all embeddings
 embeddings = store.get(include=['embeddings'])
