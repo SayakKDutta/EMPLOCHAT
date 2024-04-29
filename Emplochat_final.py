@@ -114,7 +114,6 @@
 
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
-#import chromadb
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain.chat_models import ChatOpenAI
@@ -125,6 +124,7 @@ import streamlit as st
 __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+import chromadb
 
 ###Enivironment settings for openai API key and Vector Embeddings############
 # os.environ['OPENAI_API_KEY'] = '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'
@@ -132,7 +132,7 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 API_KEY = st.secrets["OPENAI_API_KEY"]
 from openai import OpenAI
 client = OpenAI(api_key=API_KEY)
-persist_directory = './embeddings/db/'
+persist_directory = 'mount/src/emplochat/embeddings/db'
 #"https://github.com/naren579/CAPSTONE_EMPLOBOT/tree/main/embeddings/db"
 
 #Initialize the Chroma DB client
@@ -210,17 +210,34 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # Accept user input
-if prompt := st.chat_input("Enter your query here?"):
+if query := st.chat_input("Enter your query here?"):
+    retrieved_results=retrieve_vector_db(query, n_results=3)
+  #print(retrieved_results)
+    if len(retrieved_results) < 1:
+        context =''
+    else:
+        context = ''.join(retrieved_results[0][0].page_content)
+        context=context+''.join(retrieved_results[1][0].page_content)
+  #print(context)
+    prompt = f'''
+    [INST]
+    You are an expert in Capgemini policies.Generate response atleast 400 tokens based on your training and by referring the context.
+
+    Question: {query}
+
+    Context : {context}
+    [/INST]
+    '''
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
     # Display user message in chat message container
     with st.chat_message("user"):
-        st.markdown(prompt)   
+        st.markdown(query)   
 
     with st.chat_message("assistant"):
         stream = client.chat.completions.create(
                 model=st.session_state["openai_model"],
-                messages=[{"role": "system", "content":"You are an expert in Capgemini policies.Generate response atleast 400 tokens\n"+ m["content"]}
+                messages=[{"role": "system", "content":m['content']}
                     for m in st.session_state.messages
                 ],
                 stream=True,
