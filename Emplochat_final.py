@@ -232,7 +232,7 @@ if query := st.chat_input("Enter your query here?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     # Display user message in chat message container
     with st.chat_message("user"):
-        st.markdown(query)   
+        st.markdown(prompt)   
 
     with st.chat_message("assistant"):
         stream = client.chat.completions.create(
