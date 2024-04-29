@@ -221,7 +221,7 @@ if query := st.chat_input("Enter your query here?"):
   #print(context)
     prompt = f'''
     [INST]
-    You are an expert in Capgemini policies.Generate response atleast 400 tokens by referring the context.
+    You are an expert in Capgemini policies.Generate response for the below question with atleast 1000 tokens by referring the 'Context'. Use bullet points when required.
 
     Question: {query}
 
