@@ -32,7 +32,7 @@ embed_prompt = OpenAIEmbeddings()
 
 ######################Getting Similar Vector Embeddings for a given prompt#####
 
-def retrieve_vector_db(query, n_results=3):
+def retrieve_vector_db(query, n_results=2):
     similar_embeddings = store.similarity_search_by_vector_with_relevance_scores(embedding = embed_prompt.embed_query(query),k=n_results)
     results=[]
     prev_embedding = []
@@ -116,7 +116,7 @@ if query := st.chat_input("Enter your query here?"):
     st.session_state.messages.append({"role": "user", "content": query})
     # Display user message in chat message container
     with st.chat_message("user"):
-        st.markdown(query)   
+        st.markdown(prompt)   
 
     with st.chat_message("assistant"):
         stream = client.chat.completions.create(max_tokens=1500,
