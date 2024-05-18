@@ -14,7 +14,7 @@ import chromadb
 
 ###Enivironment settings for openai API key and Vector Embeddings############
 with st.sidebar:
-    API_KEY = st.text_input["Your_API_key_here"]
+    API_KEY = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
 from openai import OpenAI
 client = OpenAI(api_key=API_KEY)
 persist_directory = '/mount/src/emplochat/embeddings/db'
