@@ -1,4 +1,6 @@
 import streamlit as st
+st.set_page_config(layout="wide")
+st.title("Emplochat")
 with st.sidebar:
     API_KEY = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
 from langchain.vectorstores import Chroma
@@ -79,8 +81,7 @@ def retrieve_vector_db(query, n_results=2):
 
 
 #################Initialize session state to store history####################
-st.set_page_config(layout="wide")
-st.title("Emplochat")
+
 
 
 if "openai_model" not in st.session_state:
