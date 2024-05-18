@@ -13,8 +13,8 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import chromadb
 
 ###Enivironment settings for openai API key and Vector Embeddings############
-
-API_KEY = st.secrets["OPENAI_API_KEY"]
+with st.sidebar:
+    API_KEY = st.text_input["Your_API_key_here"]
 from openai import OpenAI
 client = OpenAI(api_key=API_KEY)
 persist_directory = '/mount/src/emplochat/embeddings/db'
