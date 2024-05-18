@@ -1,3 +1,6 @@
+import streamlit as st
+with st.sidebar:
+    API_KEY = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
@@ -5,7 +8,6 @@ from langchain.prompts import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 import pprint
 import os
-import streamlit as st
 from openai import OpenAI
 
 __import__('pysqlite3')
@@ -14,8 +16,7 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import chromadb
 
 ###Enivironment settings for openai API key and Vector Embeddings############
-with st.sidebar:
-    API_KEY = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+
 
 client = OpenAI(api_key=API_KEY)
 persist_directory = '/mount/src/emplochat/embeddings/db'
