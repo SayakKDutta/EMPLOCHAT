@@ -1,4 +1,5 @@
 import streamlit as st
+from openai import OpenAI
 st.set_page_config(layout="wide")
 st.title("Emplochat")
 with st.sidebar:
@@ -15,7 +16,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 import pprint
 import os
-from openai import OpenAI
+
 
 __import__('pysqlite3')
 import sys
